@@ -2086,3 +2086,18 @@ async def shutdown_db_client():
     if middleware_manager and middleware_manager.initialized:
         await middleware_manager.shutdown()
     client.close()
+
+@app.get('/api/pay/cashapp')
+def _pcash(amount: float = 0):
+    return {'method':'cashapp','tag':'jrs092393','url': f'https://cash.app/$jrs092393/{amount}' if amount>0 else 'https://cash.app/$jrs092393'}
+
+@app.get('/api/pay/chime')
+def _pchime(): return {'method':'chime','tag':'jrs092393','instructions':'Chime > Pay Anyone > send to $jrs092393'}
+
+@app.get('/api/pay/lightning')
+def _pln(amount: float = 0):
+    a=''
+    return {'method':'lightning','address':a,'enabled':bool(a),'amount_sats':amount}
+
+@app.get('/api/pay')
+def _pall(): return {'cashapp':{'tag':'jrs092393','url':'https://cash.app/$jrs092393'},'chime':{'tag':'jrs092393'},'lightning':{'address':'','enabled':bool('')}}
