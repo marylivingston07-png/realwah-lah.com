@@ -12,6 +12,7 @@
     "backend:test": "cd backend && pytest -v",
     "backend:health": "curl http://localhost:8001/api/health",
     "frontend:install": "yarn --cwd frontend install --frozen-lockfile",
+    "build": "yarn --cwd frontend build",
     "frontend:build": "yarn --cwd frontend build",
     "frontend:start": "yarn --cwd frontend start",
     "install": "npm run backend:install && npm run frontend:install",
